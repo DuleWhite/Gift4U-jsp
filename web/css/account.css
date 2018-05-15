@@ -88,8 +88,8 @@
 .signupin {
     min-height: 850px;
     overflow: hidden;
-    background-size: cover;
     background: rgba(255, 255, 233, 0.4) url("../img/account_bg.png") no-repeat center;
+    background-size: cover;
     font-family: Museo-700, serif;
 }
 

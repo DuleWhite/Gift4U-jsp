@@ -39,9 +39,13 @@
   <script type="text/javascript" src="js/common.js"></script>
   <script type="text/javascript" src="js/productDetails.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
+  <script type="text/javascript" src="js/account.js"></script>
 </head>
 
 <body>
+<%
+
+%>
 <!-- .logo -->
 <div class="logo container">
   <a href="index.jsp">
@@ -63,17 +67,17 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a>Home</a></li>
-        <li><a href="pages/products.html">Products</a></li>
+        <li><a href="pages/products.jsp">Products</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="hidden"><a href="pages/login.html">Login</a></li>
+        <li class="hidden"><a href="pages/login.jsp">Login</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dule<span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="pages/orders.html">Orders</a></li>
-            <li><a href="pages/cart.html">Cart</a></li>
+            <li><a href="pages/orders.jsp">Orders</a></li>
+            <li><a href="pages/cart.jsp">Cart</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="pages/login.html">Logout</a></li>
+            <li><a href="pages/login.jsp">Logout</a></li>
           </ul>
         </li>
       </ul>
@@ -111,13 +115,13 @@
   <div class="product-item">
     <div class="product-panel">
       <div class="image">
-        <a href="pages/product.html">
+        <a href="pages/product.jsp">
           <img src="img/product-1-1-s.jpg">
         </a>
         <span class="product-tag">Best Seller</span>
         <button class="product-qwbtn" data-toggle="artModal" data-target="product-quick-view-modal">QUICK VIEW</button>
       </div>
-      <a href="pages/product.html">
+      <a href="pages/product.jsp">
         <div class="product-info" class="container">
           <h3>I'm a product</h3>
           <div class="dividers">
@@ -131,13 +135,13 @@
   <div class="product-item">
     <div class="product-panel">
       <div class="image">
-        <a href="pages/product.html">
+        <a href="pages/product.jsp">
           <img src="img/product-2-1-s.jpg">
         </a>
         <span class="product-tag">Best Seller</span>
         <button class="product-qwbtn" data-toggle="artModal" data-target="product-quick-view-modal">QUICK VIEW</button>
       </div>
-      <a href="pages/product.html">
+      <a href="pages/product.jsp">
         <div class="product-info" class="container">
           <h3>I'm a product</h3>
           <div class="dividers">
@@ -151,13 +155,13 @@
   <div class="product-item">
     <div class="product-panel">
       <div class="image">
-        <a href="pages/product.html">
+        <a href="pages/product.jsp">
           <img src="img/product-3-1-s.jpg">
         </a>
         <span class="product-tag">Best Seller</span>
         <button class="product-qwbtn" data-toggle="artModal" data-target="product-quick-view-modal">QUICK VIEW</button>
       </div>
-      <a href="pages/product.html">
+      <a href="pages/product.jsp">
         <div class="product-info" class="container">
           <h3>I'm a product</h3>
           <div class="dividers">
@@ -171,13 +175,13 @@
   <div class="product-item">
     <div class="product-panel">
       <div class="image">
-        <a href="pages/product.html">
+        <a href="pages/product.jsp">
           <img src="img/product-4-1-s.jpg">
         </a>
         <span class="product-tag">Best Seller</span>
         <button class="product-qwbtn" data-toggle="artModal" data-target="product-quick-view-modal">QUICK VIEW</button>
       </div>
-      <a href="pages/product.html">
+      <a href="pages/product.jsp">
         <div class="product-info" class="container">
           <h3>I'm a product</h3>
           <div class="dividers">
@@ -191,13 +195,13 @@
   <div class="product-item">
     <div class="product-panel">
       <div class="image">
-        <a href="pages/product.html">
+        <a href="pages/product.jsp">
           <img src="img/product-5-1-s.jpg">
         </a>
         <span class="product-tag">Best Seller</span>
         <button class="product-qwbtn" data-toggle="artModal" data-target="product-quick-view-modal">QUICK VIEW</button>
       </div>
-      <a href="pages/product.html">
+      <a href="pages/product.jsp">
         <div class="product-info" class="container">
           <h3>I'm a product</h3>
           <div class="dividers">
@@ -211,13 +215,13 @@
   <div class="product-item">
     <div class="product-panel">
       <div class="image">
-        <a href="pages/product.html">
+        <a href="pages/product.jsp">
           <img src="img/product-6-1-s.jpg">
         </a>
         <span class="product-tag">Best Seller</span>
         <button class="product-qwbtn" data-toggle="artModal" data-target="product-quick-view-modal">QUICK VIEW</button>
       </div>
-      <a href="pages/product.html">
+      <a href="pages/product.jsp">
         <div class="product-info" class="container">
           <h3>I'm a product</h3>
           <div class="dividers">

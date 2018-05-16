@@ -5,6 +5,7 @@
          version="4.0">
 
 
+    <!--1. ProductInfoServlet-->
     <servlet>
         <servlet-name>ProductInfoServlet</servlet-name>
         <servlet-class>servlet.ProductInfoServlet</servlet-class>
@@ -15,7 +16,7 @@
         <url-pattern>/ProductInfoServlet</url-pattern>
     </servlet-mapping>
 
-
+    <!--2. AddToCartServlet-->
     <servlet>
         <servlet-name>AddToCartServlet</servlet-name>
         <servlet-class>servlet.AddToCartServlet</servlet-class>
@@ -26,5 +27,69 @@
         <url-pattern>/AddToCartServlet</url-pattern>
     </servlet-mapping>
 
+    <!--3. MessageServlet-->
+    <servlet>
+        <servlet-name>MessageServlet</servlet-name>
+        <servlet-class>servlet.MessageServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>MessageServlet</servlet-name>
+        <url-pattern>/MessageServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--4. CodeServlet-->
+    <servlet>
+        <servlet-name>CodeServlet</servlet-name>
+        <servlet-class>servlet.CodeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CodeServlet</servlet-name>
+        <url-pattern>/CodeServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--5. UsernameJudgementServlet-->
+    <servlet>
+        <servlet-name>UsernameJudgementServlet</servlet-name>
+        <servlet-class>servlet.UsernameJudgementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UsernameJudgementServlet</servlet-name>
+        <url-pattern>/UsernameJudgementServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--6. PhoneJudgementServlet-->
+    <servlet>
+        <servlet-name>PhoneJudgementServlet</servlet-name>
+        <servlet-class>servlet.PhoneJudgementServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PhoneJudgementServlet</servlet-name>
+        <url-pattern>/PhoneJudgementServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--7. SignUpServlet-->
+    <servlet>
+        <servlet-name>SignUpServlet</servlet-name>
+        <servlet-class>servlet.SignUpServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SignUpServlet</servlet-name>
+        <url-pattern>/SignUpServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--8. LoginServlet-->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>servlet.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

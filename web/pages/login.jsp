@@ -29,6 +29,10 @@
 </head>
 
 <body>
+<%
+    session.removeAttribute("userid");
+    session.removeAttribute("username");
+%>
 <!-- .logo -->
 <div class="logo container">
     <a href="../index.jsp">
@@ -50,7 +54,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="../index.jsp">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="../pages/products.jsp">Products</a></li>
+                <li><a href="products.jsp">Products</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -70,12 +74,12 @@
                 <label>Phone number</label>
                 <div>
                     <input id="phone" type="number" maxlength=11 minlength=11 name="phoneNumber">
-                    <button id="getCode">Send</button>
+                    <button id="getCode2">Send</button>
                 </div>
                 <label>Verification code</label>
                 <div>
-                    <input type="number" maxlength=6 minlength=6 name="verificationCode">
-                    <button>Sign Up</button>
+                    <input id="code" type="number" maxlength=6 minlength=6 name="verificationCode">
+                    <button id="login">Login</button>
                 </div>
                 <span class="hint">hint:</span>
                 <span class="have-account">

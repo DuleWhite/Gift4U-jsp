@@ -50,7 +50,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="../index.jsp">Home <span class="sr-only">(current)</span></a></li>
-                <li><a href="../pages/products.jsp">Products</a></li>
+                <li><a href="products.jsp">Products</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -69,21 +69,21 @@
             <div class="right">
                 <label>Username</label>
                 <div>
-                    <input type="text" maxlength=12 minlength=12 name="username">
+                    <input id="username" type="text" maxlength=12 minlength=12 name="username">
                 </div>
                 <label>Phone number</label>
                 <div>
-                    <input type="number" maxlength=11 minlength=11 name="phoneNumber">
-                    <button>Send</button>
+                    <input id="phone" type="number" maxlength=11 minlength=11 name="phoneNumber">
+                    <button id="getCode1">Send</button>
                 </div>
                 <label>Verification code</label>
                 <div>
-                    <input type="number" maxlength=6 minlength=6 name="verificationCode">
+                    <input id="code" type="number" maxlength=6 minlength=6 name="verificationCode">
                     <button id="signUp">Sign Up</button>
                 </div>
                 <span class="hint">hint:</span>
                 <span class="have-account">
-                        Already have account?  <a href="login.jsp">login</a>
+                        Already have account?  <a href="login.jsp">Login</a>
                     </span>
             </div>
         </div>

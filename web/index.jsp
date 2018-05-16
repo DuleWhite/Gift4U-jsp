@@ -70,9 +70,18 @@
         <li><a href="pages/products.jsp">Products</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="hidden"><a href="pages/login.jsp">Login</a></li>
+        <%
+          String username = (String) session.getAttribute("username");
+          String userid = (String) session.getAttribute("userid");
+          if(userid==null||userid.equals("")){
+        %>
+        <li ><a href="pages/login.jsp">Login</a></li>
+        <%
+          }
+          else{
+        %>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dule<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=username%><span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="pages/orders.jsp">Orders</a></li>
             <li><a href="pages/cart.jsp">Cart</a></li>
@@ -80,6 +89,9 @@
             <li><a href="pages/login.jsp">Logout</a></li>
           </ul>
         </li>
+        <%
+          }
+        %>
       </ul>
     </div>
     <!-- /.navbar-collapse -->

@@ -35,6 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../css/productDetails.css">
     <link rel="stylesheet" type="text/css" href="../css/products.css">
     <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/toast.js"></script>
     <script type="text/javascript" src="../js/productDetails.js"></script>
     <script type="text/javascript" src="../js/products.js"></script>
 </head>
@@ -118,7 +119,7 @@
                 %>
                 <button class="product-qwbtn">QUICK VIEW</button>
             </div>
-            <a href="product.jsp">
+            <a href="product.jsp?id=<%=p.getProductId()%>">
                 <div class="product-info" class="container">
                     <h3><%=p.getProductName()%></h3>
                     <h5>$<%=p.getProductPrice()%></h5>
@@ -148,22 +149,20 @@
                 <div class="product-details-right">
                     <div class="product-picture">
                         <i class="zoom-hint"></i>
-                        <img id="zoom-img" src="../img/product-1-1-s.jpg">
+                        <img id="zoom-img">
                     </div>
-                    <div id="modal-productImages" class="product-picture-guide">
-                        <img class="guide-img selected" src="../img/product-1-1-s.jpg">
-                        <img class="guide-img" src="../img/product-1-2-s.jpg">
+                    <div id="productImages" class="product-picture-guide">
                     </div>
                 </div>
                 <div class="product-details-left">
                     <div class="product-name">
-                        <h1 id="modal-productName">I'm a Product</h1>
+                        <h1 id="productName"></h1>
                     </div>
                     <div class="product-price">
-                        <h3 id="modal-productPrice">$88.88</h3>
+                        <h3 id="productPrice"></h3>
                     </div>
                     <a>View Full Details</a>
-                    <div class="color" id="modal-color">
+                    <div class="color" id="color">
                         <h4>Color</h4>
                         <div id="color-tip" class="tooltip right" role="tooltip">
                             <div class="tooltip-arrow"></div>
@@ -172,33 +171,23 @@
                             </div>
                         </div>
                         <ul>
-                            <li>
-                                <div class="color-label" style="background-color: rgb(0,0,0);"></div>
-                            </li>
-                            <li>
-                                <div class="color-label" style="background-color: Brown;"></div>
-                            </li>`
                         </ul>
                     </div>
                     <div id="size">
                         <h4>Size</h4>
                         <div id="selected-size">
-                            <span>Small</span>
+                            <span></span>
                             <b></b>
                         </div>
                         <div id="size-list">
-                            <ul>
-                                <li><span>Small</span></li>
-                                <li><span>Medium</span></li>
-                                <li><span>Large</span></li>
-                            </ul>
+                            <ul></ul>
                         </div>
                     </div>
                     <div class="quantity">
                         <h4>Quantity</h4>
                         <input id="quantity-input" type="number" name="quantity" min=1>
                     </div>
-                    <span style="display: none;" id="modal-productId"></span>
+                    <span style="display: none;" id="productId"></span>
                     <button id="btn-add-to-cart" class="gift4u-button" data-loading-text="ADDING..." autocomplete="off">ADD TO CART</button>
                     <div id="add-success" class="alert alert-success fade in" style="display: none;">
                         <button type="button" class="close">

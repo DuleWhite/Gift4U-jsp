@@ -1,4 +1,5 @@
-<%--
+<%@ page import="entity.CartProduct" %>
+<%@ page import="util.CartProductManager" %><%--
   Created by IntelliJ IDEA.
   User: duulewhite
   Date: 5/13/18
@@ -32,6 +33,9 @@
 <%
     session.removeAttribute("userid");
     session.removeAttribute("username");
+    request.getSession().removeAttribute("cartProducts");
+    request.getSession().removeAttribute("code");
+    CartProductManager.clear();
 %>
 <!-- .logo -->
 <div class="logo container">

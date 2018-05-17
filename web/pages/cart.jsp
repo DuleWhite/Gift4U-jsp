@@ -1,4 +1,12 @@
-<%--
+<%@ page import="java.util.Dictionary" %>
+<%@ page import="entity.Product" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="util.ProductsManager" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="util.CartProductManager" %>
+<%@ page import="java.util.List" %>
+<%@ page import="entity.CartProduct" %><%--
   Created by IntelliJ IDEA.
   User: duulewhite
   Date: 5/13/18
@@ -91,6 +99,30 @@
 <!-- /.navbar -->
 <!-- .cart-list -->
 <div class="cart-list">
+    <%
+        String cartProductsString = (String) session.getAttribute("cartProducts");
+        try {
+            System.out.println("Original: "+cartProductsString);
+            if(cartProductsString!=null&&!cartProductsString.equals(""))
+                CartProductManager.updateCartProducts(cartProductsString);
+            List<CartProduct> cartProducts = CartProductManager.getCartProducts();
+            System.out.println("After Format: ");
+            for (CartProduct cp : cartProducts){
+                System.out.print(cp.getProductId()+"-");
+                System.out.print(cp.getProductColor()+"-");
+                System.out.print(cp.getProductSize()+"-");
+                System.out.print(cp.getQuantity()+",");
+                System.out.println();
+            }
+            session.removeAttribute("cartProducts");
+            session.setAttribute("cartProducts",CartProductManager.getLastesCartProductsString());
+            System.out.println("After Replaced: "+session.getAttribute("cartProducts"));
+            System.out.println();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        List<CartProduct> cartProducts = CartProductManager.getCartProducts();
+    %>
     <!-- .continue-shopping -->
     <div class="continue-shopping">
         <a href="products.jsp">
@@ -121,34 +153,51 @@
         <div class="list-header">
             <div class="list-title">
                 <h2>My Cart</h2>
-                <span>(1)</span>
+                <%if(CartProductManager.getCount()>0){%>
+                <span>(<%=CartProductManager.getCount()%>)</span>
+                <%}%>
             </div>
+            <%if(CartProductManager.getCount()>0){%>
             <div class="list-parameters">
                 <div>Price</div>
                 <div>Qty</div>
                 <div>Total</div>
             </div>
+            <%}%>
         </div>
         <!-- .empty-cart -->
+        <%if(CartProductManager.getCount()==0){%>
         <div class="empty-cart">
             <span>Cart is empty</span>
             <div>
                 <a href="products.jsp">Continue Shopping</a>
             </div>
         </div>
+        <%}else{%>
         <!-- /.empty-cart -->
         <div class="list-body">
+            <%
+                for(CartProduct cp : cartProducts){
+            %>
             <div class="item">
                 <div class="item-left">
                     <a class="item-picture-preview" href="product.jsp">
-                        <img src="../img/product-1-1-s.jpg">
+                        <img src="../img/<%=cp.getProductImages()[0]%>">
                     </a>
                     <div class="item-info">
-                        <h3>I'm a product</h3>
+                        <h3><%=cp.getProductName()%></h3>
                         <div class="item-property">
-                            <span>PID: 123456</span>
-                            <span>Color: White</span>
-                            <span>$88.88</span>
+                            <span>PID: <%=cp.getProductId()%></span>
+                            <%
+                                if(cp.hasColor()){%>
+                            <span>Color: <%=cp.getProductColor()%></span>
+                            <%
+                                }
+                                if(cp.hasSize()){
+                            %>
+                            <span>Size: <%=cp.getProductSize()%></span>
+                            <%}%>
+                            <span>$<%=cp.getProductPrice()%></span>
                         </div>
                         <button class="btn-remove">
                             <span>Remove</span>
@@ -156,17 +205,24 @@
                     </div>
                 </div>
                 <div class="item-right">
-                    <div><span>$88.88</span></div>
+                    <div><span>$<%=cp.getProductPrice()%></span></div>
                     <div>
-                        <input id="quantity-input" type="number" name="quantity" min=1>
+                        <input class="quantity-input" type="number" name="quantity" min="1" value="<%=cp.getQuantity()%>">
                     </div>
-                    <div><span>$88.88</span></div>
+                    <div><span>$<%=cp.getProductPrice()*cp.getQuantity()%></span></div>
                 </div>
             </div>
+            <%
+                }
+            %>
         </div>
+        <%}%>
     </div>
     <!-- /.item-list -->
     <!-- .summary -->
+    <%
+        if(CartProductManager.getCount()>0){
+    %>
     <div class="summary">
         <div class="summary-left">
             <button class="btn-add-note">
@@ -194,7 +250,7 @@
                     <dl>
                         <div class="summary-item-subtotal">
                             <dt>Subtotal</dt>
-                            <dd>$88.88</dd>
+                            <dd>$<%=CartProductManager.getTotalPrice()%></dd>
                         </div>
                         <div class="summary-item-shipping">
                             <dt>
@@ -212,7 +268,7 @@
                 <div class="summary-total">
                     <dl>
                         <dt>Total</dt>
-                        <dd>$88.88</dd>
+                        <dd>$<%=CartProductManager.getTotalPrice()%></dd>
                     </dl>
                 </div>
             </div>
@@ -231,6 +287,9 @@
             </button>
         </div>
     </div>
+    <%
+        }
+    %>
     <!-- .summary -->
 </div>
 <!-- /.cart-list -->

@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../css/productDetails.css">
     <link rel="stylesheet" type="text/css" href="../css/product.css">
     <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/toast.js"></script>
     <script type="text/javascript" src="../js/productDetails.js"></script>
     <script type="text/javascript" src="../js/product.js"></script>
 </head>
@@ -187,6 +188,7 @@
             <h4>Quantity</h4>
             <input id="quantity-input" type="number" name="quantity" min=1>
         </div>
+        <span style="display: none">id=<%=p.getProductId()%></span>
         <button id="btn-add-to-cart" class="gift4u-button" data-loading-text="ADDING..." autocomplete="off">ADD TO CART</button>
         <div id="add-success" class="alert alert-success fade in" style="display: none;">
             <button type="button" class="close">

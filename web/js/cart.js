@@ -1,5 +1,4 @@
 $(function() {
-    $("#quantity-input").val("1");
     $(".btn-add-note").click(function() {
         if ($(".cart-note textarea").css("display") == "none") {
             $(".cart-note textarea").css("display", "block");

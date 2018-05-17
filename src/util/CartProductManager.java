@@ -10,30 +10,21 @@ import java.util.List;
 public class CartProductManager {
     private static List<CartProduct> cartProducts;
     static {
-        totalPrice=0;
-        count=0;
         cartProducts = new ArrayList<>();
 
     }
-    private static double totalPrice;
 
     public static double getTotalPrice() {
+        double totalPrice = 0;
+        for (CartProduct cartProduct: cartProducts) {
+            totalPrice += cartProduct.getProductPrice() * cartProduct.getQuantity();
+        }
         return totalPrice;
     }
 
-    public static void setTotalPrice(double totalPrice) {
-        CartProductManager.totalPrice = totalPrice;
-    }
-
     public static int getCount() {
-        return count;
+        return cartProducts.size();
     }
-
-    public static void setCount(int count) {
-        CartProductManager.count = count;
-    }
-
-    private static int count;
 
     public CartProductManager() {
 
@@ -41,16 +32,10 @@ public class CartProductManager {
 
     public static void updateCartProducts(String cartProductsString) throws SQLException {
         clear();
-        System.out.println("updateCartProducts received ;"+cartProductsString);
         String[] cartProductsArray = new String[0];
         if (cartProductsString != null && !cartProductsString.equals("")) {
             cartProductsArray = cartProductsString.split(",");
         }
-        System.out.println("updateCartProducts: after split: ");
-        for (String str: cartProductsArray){
-            System.out.print(str+",");
-        }
-        System.out.println();
         for (String cp : cartProductsArray){
             String[] cartProductDetails = cp.split("-");
             addProduct(Integer.parseInt(cartProductDetails[0]),cartProductDetails[1],cartProductDetails[2],Integer.parseInt(cartProductDetails[3]));
@@ -67,25 +52,19 @@ public class CartProductManager {
             str += cp.getProductSize();
             str += "-";
             str += String.valueOf(cp.getQuantity());
-            System.out.println("getLastesCartProductsString: " + str);
             if(ret.equals("")) ret += str;
             else ret+=","+str;
         }
-        System.out.println(ret);
         return ret;
     }
 
     public static void clear(){
-        totalPrice=0;
-        count=0;
         cartProducts = new ArrayList<>();
     }
     private static void addProduct(int productId, String color, String size, int quantity) throws SQLException {
-        System.out.println("addProduct received: "+productId+","+color+","+size+","+quantity);
         for (CartProduct cartProduct : cartProducts) {
             if (productId == cartProduct.getProductId() && color.equals(cartProduct.getProductColor()) && size.equals(cartProduct.getProductSize())) {
                 cartProduct.setQuantity(cartProduct.getQuantity() + quantity);
-                totalPrice += cartProduct.getProductPrice()*quantity;
                 return;
             }
         }
@@ -95,8 +74,6 @@ public class CartProductManager {
         cp.setProductName(p.getProductName());
         cp.setProductPrice(p.getProductPrice());
         cartProducts.add(cp);
-        count++;
-        totalPrice += cp.getProductPrice()*cp.getQuantity();
     }
 
     public static List<CartProduct> getCartProducts() {
@@ -105,5 +82,40 @@ public class CartProductManager {
 
     public static void setCartProducts(List<CartProduct> cartProducts) {
         CartProductManager.cartProducts = cartProducts;
+    }
+
+    public static void removeProduct(int productId, String productColor, String productSize) {
+        for (CartProduct cartProduct: cartProducts){
+            if(cartProduct.getProductId()==productId){
+                if(cartProduct.hasColor()&&cartProduct.hasSize()&&productColor.equals(cartProduct.getProductColor())&&productSize.equals(cartProduct.getProductSize())) {
+                    cartProducts.remove(cartProduct);
+                    return;
+                }
+                if(cartProduct.hasColor()&&!cartProduct.hasSize()&&productColor.equals(cartProduct.getProductColor())) {
+                    cartProducts.remove(cartProduct);
+                    return;
+                }
+                if(cartProduct.hasSize()&&!cartProduct.hasColor()&&productSize.equals(cartProduct.getProductSize())) {
+                    cartProducts.remove(cartProduct);
+                    return;
+                }
+                if(!cartProduct.hasColor()&&!cartProduct.hasSize()) {
+                    cartProducts.remove(cartProduct);
+                    return;
+                }
+            }
+        }
+    }
+
+    public static void print(){
+        System.out.println("print:");
+        for (CartProduct cp : cartProducts) {
+            System.out.print(cp.getProductId() + "-");
+            System.out.print(cp.getProductColor() + "-");
+            System.out.print(cp.getProductSize() + "-");
+            System.out.print(cp.getQuantity());
+            System.out.println();
+        }
+        System.out.println(getCount());
     }
 }

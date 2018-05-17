@@ -20,7 +20,7 @@
     <script src="../js/jquery-2.1.4.min.js"></script>
     <!-- Bootstrap -->
     <script src="../js/bootstrap.min.js"></script>
-    <title>[PageName] | Gift4U</title>
+    <title>Thank You | Gift4U</title>
     <link rel="stylesheet" type="text/css" href="../css/font.css">
     <link rel="stylesheet" type="text/css" href="../css/common.css">
     <link rel="stylesheet" type="text/css" href="../css/thanks.css">
@@ -28,6 +28,12 @@
 </head>
 
 <body>
+<%
+    String orderId = request.getParameter("orderId");
+    String totalPrice = request.getParameter("totalPrice");
+    String shippingTo1 = request.getParameter("shippingTo1");
+    String shippingTo2 = request.getParameter("shippingTo2");
+%>
 <!-- .logo -->
 <div class="logo container">
     <a href="../index.jsp">
@@ -84,7 +90,7 @@
 <div class="thanks">
     <!-- .thanks-header -->
     <div class="thanks-header">
-        <h2> Thank you for shopping with us, Dule.</h2>
+        <h2> Thank you for shopping with us, <%=(String)session.getAttribute("username")%>.</h2>
         <span>Hope to see you again soon!</span>
     </div>
     <!-- /.thanks-header -->
@@ -93,18 +99,18 @@
         <ul>
             <li>
                 <span>Order No.</span>
-                <span>10000</span>
+                <span><%=orderId%></span>
             </li>
             <li>
                 <span>Total</span>
-                <span>$88.88</span>
+                <span>$<%=totalPrice%></span>
             </li>
             <li>
                 <span>Shipping to</span>
                 <div>
                     <span>Adress</span>
-                    <span>Hohhot, Saihan</span>
-                    <span>Inner Mongolia</span>
+                    <span><%=shippingTo2%></span>
+                    <span><%=shippingTo1%></span>
                 </div>
             </li>
         </ul>

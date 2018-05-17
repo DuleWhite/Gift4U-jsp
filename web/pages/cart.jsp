@@ -39,6 +39,7 @@
     <link rel="stylesheet" type="text/css" href="../css/common.css">
     <link rel="stylesheet" type="text/css" href="../css/cart.css">
     <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/toast.js"></script>
     <script type="text/javascript" src="../js/cart.js"></script>
     <!-- distpicker : https://github.com/fengyuanchen/distpicker -->
 </head>
@@ -102,22 +103,11 @@
     <%
         String cartProductsString = (String) session.getAttribute("cartProducts");
         try {
-            System.out.println("Original: "+cartProductsString);
             if(cartProductsString!=null&&!cartProductsString.equals(""))
                 CartProductManager.updateCartProducts(cartProductsString);
             List<CartProduct> cartProducts = CartProductManager.getCartProducts();
-            System.out.println("After Format: ");
-            for (CartProduct cp : cartProducts){
-                System.out.print(cp.getProductId()+"-");
-                System.out.print(cp.getProductColor()+"-");
-                System.out.print(cp.getProductSize()+"-");
-                System.out.print(cp.getQuantity()+",");
-                System.out.println();
-            }
             session.removeAttribute("cartProducts");
-            session.setAttribute("cartProducts",CartProductManager.getLastesCartProductsString());
-            System.out.println("After Replaced: "+session.getAttribute("cartProducts"));
-            System.out.println();
+            //session.setAttribute("cartProducts",CartProductManager.getLastesCartProductsString());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -133,6 +123,9 @@
                         </g>
                     </svg>
                 </span>Continue Shopping</a>
+        <%
+            if(CartProductManager.getCount()>0){
+        %>
         <button class="checkout">
                 <span>
                     <svg width="1em" height="1em" viewBox="0 0 11 14">
@@ -146,6 +139,9 @@
                     Checkout
                 </span>
         </button>
+        <%
+            }
+        %>
     </div>
     <!-- /.continue-shopping -->
     <!-- .item-list -->
@@ -166,22 +162,28 @@
             <%}%>
         </div>
         <!-- .empty-cart -->
-        <%if(CartProductManager.getCount()==0){%>
-        <div class="empty-cart">
+        <%
+            String emptyCartDisplay;
+            if(CartProductManager.getCount()==0) emptyCartDisplay = "block";
+            else emptyCartDisplay = "none";
+        %>
+        <div class="empty-cart" style="display: <%=emptyCartDisplay%>;">
             <span>Cart is empty</span>
             <div>
                 <a href="products.jsp">Continue Shopping</a>
             </div>
         </div>
-        <%}else{%>
         <!-- /.empty-cart -->
+        <%
+            if(CartProductManager.getCount()>0){
+        %>
         <div class="list-body">
             <%
                 for(CartProduct cp : cartProducts){
             %>
             <div class="item">
                 <div class="item-left">
-                    <a class="item-picture-preview" href="product.jsp">
+                    <a class="item-picture-preview" href="product.jsp?id=<%=cp.getProductId()%>">
                         <img src="../img/<%=cp.getProductImages()[0]%>">
                     </a>
                     <div class="item-info">
@@ -216,7 +218,9 @@
                 }
             %>
         </div>
-        <%}%>
+        <%
+            }
+        %>
     </div>
     <!-- /.item-list -->
     <!-- .summary -->

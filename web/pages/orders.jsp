@@ -1,4 +1,10 @@
-<%--
+<%@ page import="java.sql.Connection" %>
+<%@ page import="util.DBManager" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="entity.Product" %>
+<%@ page import="util.ProductsManager" %><%--
   Created by IntelliJ IDEA.
   User: duulewhite
   Date: 5/13/18
@@ -25,7 +31,8 @@
     <link rel="stylesheet" type="text/css" href="../css/common.css">
     <link rel="stylesheet" type="text/css" href="../css/orders.css">
     <script type="text/javascript" src="../js/common.js"></script>
-    <!-- <script type="text/javascript" src="../js/orders.js"></script> -->
+    <script type="text/javascript" src="../js/toast.js"></script>
+    <script type="text/javascript" src="../js/orders.js"></script>
 </head>
 
 <body>
@@ -93,113 +100,132 @@
                             </g>
                         </svg>
                     </span>Continue Shopping</a>
-        <button id="btn-confirm" class="btn-confirm">
+        <button id="btn-confirm-all" class="btn-confirm-all">
             <span>Confirm All</span>
         </button>
     </div>
     <!-- /.continue-shopping -->
     <!-- .order-list -->
+    <%
+        Connection connection = DBManager.getConnection();
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM orders WHERE userid='"+userid+"'");
+            int count = 0 ;
+            while(resultSet.next()){
+                count++;
+            }
+    %>
     <div class="order-list">
         <div class="list-title">
             <h2>My Orders</h2>
-            <span>(2)</span>
+            <span>(<%=count%>)</span>
         </div>
         <!-- .empty-cart -->
-        <div class="no-order">
+        <%
+            if(count==0){
+        %>
+        <div class="no-order" style="display: block;">
+        <%
+            }
+            else{
+        %>
+        <div class="no-order" style="display: none">
+        <%
+            }
+        %>
             <span>No order</span>
             <div>
                 <a href="products.jsp">Continue Shopping</a>
             </div>
         </div>
         <!-- /.empty-cart -->
+        <%
+            if(count>0){
+                resultSet = statement.executeQuery("SELECT * FROM orders WHERE userid='"+userid+"'");
+        %>
         <div class="list-body">
+            <%
+                while(resultSet.next()){
+                    String orderid = resultSet.getString("orderid");
+                    String orderDate = resultSet.getString("orderdate");
+                    String totalPrice = resultSet.getString("totalprice");
+                    String shippingTo = resultSet.getString("shippingto");
+                    String orderStatus = resultSet.getString("orderstatus");
+            %>
             <div class="item">
                 <div class="item-left">
-                    <h3>Order No.: 20000</h3>
+                    <h3>Order No.: <%=orderid%></h3>
                     <div class="order-property">
-                        <span>Order date: 2018-6-7  11:28</span>
-                        <span>Total: $266.64</span>
-                        <span>Shipping to: Inner Mongolia, Hohhot, Saihan</span>
-                        <span>Status: Delivery</span>
+                        <span>Order date: <%=orderDate%></span>
+                        <span>Total: $<%=totalPrice%></span>
+                        <span>Shipping to: <%=shippingTo%></span>
+                        <span>Status: <%=orderStatus%></span>
                     </div>
-                    <button id="btn-confirm" class="btn-confirm">
+                    <%
+                        if(orderStatus.equals("Delivery")){
+                    %>
+                    <button class="btn-confirm">
                         <span>Confirm receipt</span>
                     </button>
+                    <%
+                        }
+                    %>
                 </div>
                 <div class="item-right">
+                <%
+                    Statement statement1 = connection.createStatement();
+                    ResultSet resultSet1 = statement1.executeQuery("SELECT * FROM order_product WHERE orderid = '"+orderid+"'");
+                    while(resultSet1.next()){
+                        String productId = resultSet1.getString("productid");
+                        String quantity = resultSet1.getString("quantity");
+                        String color = resultSet1.getString("selectedcolor");
+                        String size = resultSet1.getString("selectedsize");
+                        Product product = ProductsManager.getProductById(Integer.parseInt(productId));
+                %>
                     <div class="products-in-order">
-                        <a class="item-picture-preview" href="product.jsp">
-                            <img src="../img/product-1-1-s.jpg">
+                        <a class="item-picture-preview" href="product.jsp?id=<%=productId%>">
+                            <img src="../img/<%=product.getProductImages()[0]%>">
                         </a>
                         <div class="item-info">
-                            <h3>I'm a product</h3>
+                            <h3><%=product.getProductName()%></h3>
                             <div class="item-property">
-                                <span>PID: 123456</span>
-                                <span>Price: $88.88</span>
-                                <span>Color: White</span>
-                                <span>Quantity: 1</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="products-in-order">
-                        <a class="item-picture-preview" href="product.jsp">
-                            <img src="../img/product-2-1-s.jpg">
-                        </a>
-                        <div class="item-info">
-                            <h3>I'm a product</h3>
-                            <div class="item-property">
-                                <span>PID: 654321</span>
-                                <span>Price: $88.88</span>
-                                <span>Color: Black</span>
-                                <span>Quantity: 2</span>
+                                <span>PID: <%=productId%></span>
+                                <span>Price: $<%=product.getProductPrice()%></span>
+                                <%
+                                    if(color!=null&&!color.equals("")){
+                                %>
+                                <span>Color: <%=color%></span>
+                                <%
+                                    }
+                                    if(size!=null&&!size.equals("")){
+                                %>
+                                <span>Quantity: <%=size%></span>
+                                <%
+                                    }
+                                %>
                             </div>
                         </div>
                     </div>
                 </div>
+                <%
+                    }
+                %>
             </div>
-            <div class="item">
-                <div class="item-left">
-                    <h3>Order No.: 10000</h3>
-                    <div class="order-property">
-                        <span>Order date: 2018-6-4 21:07</span>
-                        <span>Total: $177.76</span>
-                        <span>Shipping to: Inner Mongolia, Hohhot, Saihan</span>
-                        <span>Status: Done</span>
-                    </div>
-                </div>
-                <div class="item-right">
-                    <div class="products-in-order">
-                        <a class="item-picture-preview" href="product.jsp">
-                            <img src="../img/product-3-1-s.jpg">
-                        </a>
-                        <div class="item-info">
-                            <h3>I'm a product</h3>
-                            <div class="item-property">
-                                <span>PID: 123456</span>
-                                <span>Price: $88.88</span>
-                                <span>Color: White</span>
-                                <span>Quantity: 1</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="products-in-order">
-                        <a class="item-picture-preview" href="product.jsp">
-                            <img src="../img/product-4-1-s.jpg">
-                        </a>
-                        <div class="item-info">
-                            <h3>I'm a product</h3>
-                            <div class="item-property">
-                                <span>PID: 654321</span>
-                                <span>Price: $88.88</span>
-                                <span>Color: Black</span>
-                                <span>Quantity: 1</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <%
+                }
+            %>
         </div>
+        <%
+            }
+        %>
     </div>
+    <%
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    %>
     <!-- /.order-list -->
 </div>
 <footer>

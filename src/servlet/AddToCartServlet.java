@@ -27,7 +27,6 @@ public class AddToCartServlet extends HttpServlet {
         else cartProducts = cartProduct;
         session.setAttribute("cartProducts",cartProducts);
         response.getWriter().write("true");
-//        System.out.println(session.getAttribute("cartProducts"));
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

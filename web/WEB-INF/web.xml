@@ -92,4 +92,48 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
+
+    <!--9. RemoveCartProductServlet-->
+    <servlet>
+        <servlet-name>RemoveCartProductServlet</servlet-name>
+        <servlet-class>servlet.RemoveCartProductServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RemoveCartProductServlet</servlet-name>
+        <url-pattern>/RemoveCartProductServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--10. CheckoutServlet-->
+    <servlet>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <servlet-class>servlet.CheckoutServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CheckoutServlet</servlet-name>
+        <url-pattern>/CheckoutServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--11. ConfirmReceiptServlet-->
+    <servlet>
+        <servlet-name>ConfirmReceiptServlet</servlet-name>
+        <servlet-class>servlet.ConfirmReceiptServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ConfirmReceiptServlet</servlet-name>
+        <url-pattern>/ConfirmReceiptServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--12. ConfirmReceiptAllServlet-->
+    <servlet>
+        <servlet-name>ConfirmReceiptAllServlet</servlet-name>
+        <servlet-class>servlet.ConfirmReceiptAllServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ConfirmReceiptAllServlet</servlet-name>
+        <url-pattern>/ConfirmReceiptAllServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

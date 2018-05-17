@@ -1,6 +1,5 @@
 package servlet;
 
-import com.mysql.cj.protocol.ResultListener;
 import util.DBManager;
 
 import javax.servlet.ServletException;
@@ -10,29 +9,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@WebServlet(name = "SignUpServlet")
-public class SignUpServlet extends HttpServlet {
+@WebServlet(name = "ConfirmReceiptAllServlet")
+public class ConfirmReceiptAllServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String phoneNunber = request.getParameter("phone");
+        String userid = (String) request.getSession().getAttribute("userid");
         Connection connection = DBManager.getConnection();
         try {
             Statement statement = connection.createStatement();
-            int rows = statement.executeUpdate("INSERT INTO users(username,userphone) VALUES ('"+username+"','"+phoneNunber+"');");
-            if(rows>0) {
+            int result = statement.executeUpdate("UPDATE orders SET orderstatus='Done' WHERE userid="+userid+" AND orderstatus='Delivery';");
+            if(result>0){
                 response.getWriter().write("true");
-                request.getSession().setAttribute("username",username);
-                ResultSet resultSet = statement.executeQuery("SELECT userid FROM users WHERE username='"+username+"';");resultSet.next();
-                request.getSession().setAttribute("userid",resultSet.getString("userid"));
             }
-            else response.getWriter().write("false");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
     }
 

@@ -5,7 +5,7 @@
     .continue-shopping a {
         float: none;
     }
-    .continue-shopping .btn-confirm {
+    .continue-shopping .btn-confirm-all {
         float: none;
         margin: 0 auto;
         margin-top: 20px;
@@ -20,7 +20,7 @@
     .continue-shopping a {
         float: left;
     }
-    .continue-shopping .btn-confirm {
+    .continue-shopping .btn-confirm-all {
         float: right;
         margin: 0 auto;
         margin-top: 20px;
@@ -35,7 +35,7 @@
     .continue-shopping a {
         float: left;
     }
-    .continue-shopping .btn-confirm {
+    .continue-shopping .btn-confirm-all {
         float: right;
         margin: 0;
         margin-left: 20px;
@@ -50,7 +50,7 @@
     .continue-shopping a {
         float: left;
     }
-    .continue-shopping .btn-confirm {
+    .continue-shopping .btn-confirm-all {
         float: right;
         margin: 0;
         margin-left: 20px;
@@ -74,7 +74,6 @@
     padding: 175px 0;
     text-align: center;
     font: normal normal normal 20px/1.25em Museo-700, serif;
-    display: none;
 }
 
 .no-order span {
@@ -109,7 +108,8 @@
     margin-right: 4px;
 }
 
-.btn-confirm {
+.btn-confirm,
+.btn-confirm-all{
     width: 100%;
     min-height: 42px;
     background-color: rgb(58, 128, 153);

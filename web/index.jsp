@@ -202,7 +202,7 @@
         <div class="product-details-right">
           <div class="product-picture">
             <i class="zoom-hint"></i>
-            <img id="zoom-img">
+            <img id="zoom-img" src="img/product-1-1-s.jpg">
           </div>
           <div id="productImages" class="product-picture-guide">
           </div>

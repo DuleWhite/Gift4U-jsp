@@ -254,7 +254,7 @@
                     <dl>
                         <div class="summary-item-subtotal">
                             <dt>Subtotal</dt>
-                            <dd>$<%=CartProductManager.getTotalPrice()%></dd>
+                            <dd id="subtotal">$<%=CartProductManager.getTotalPrice()%></dd>
                         </div>
                         <div class="summary-item-shipping">
                             <dt>
@@ -272,7 +272,7 @@
                 <div class="summary-total">
                     <dl>
                         <dt>Total</dt>
-                        <dd>$<%=CartProductManager.getTotalPrice()%></dd>
+                        <dd id="total-price">$<%=CartProductManager.getTotalPrice()%></dd>
                     </dl>
                 </div>
             </div>
@@ -314,7 +314,7 @@
             <select id="select-city" data-city="Hohhot"></select>
             <label>Area</label>
             <select id="select-area" data-district="Saihan"></select>
-            <button id="btn-update" class="checkout">Update</button>
+            <button id="btn-update" class="btn-update">Update</button>
         </div>
     </div>
 </div>

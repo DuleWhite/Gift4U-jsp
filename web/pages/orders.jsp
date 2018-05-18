@@ -143,7 +143,7 @@
         <!-- /.empty-cart -->
         <%
             if(count>0){
-                resultSet = statement.executeQuery("SELECT * FROM orders WHERE userid='"+userid+"'");
+                resultSet = statement.executeQuery("SELECT * FROM orders WHERE userid='"+userid+"' ORDER BY orderdate DESC;");
         %>
         <div class="list-body">
             <%
@@ -200,18 +200,20 @@
                                 <%
                                     }
                                     if(size!=null&&!size.equals("")){
+                                        System.out.println(size);
                                 %>
-                                <span>Quantity: <%=size%></span>
+                                <span>Size: <%=size%></span>
                                 <%
                                     }
                                 %>
+                                <span>Quantity: <%=quantity%></span>
                             </div>
                         </div>
                     </div>
+                    <%
+                        }
+                    %>
                 </div>
-                <%
-                    }
-                %>
             </div>
             <%
                 }

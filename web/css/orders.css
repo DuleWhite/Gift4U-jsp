@@ -282,3 +282,8 @@
         min-width: 300px;
     }
 }
+
+.products-in-order{
+    min-height: 140px;
+    overflow: hidden;
+}

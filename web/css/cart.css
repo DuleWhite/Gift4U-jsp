@@ -606,3 +606,11 @@
 .distpicker .artModal-content select::-ms-expand {
     display: none;
 }
+.btn-update{
+    width: 100%;
+    min-height: 42px;
+    background-color: rgb(58, 128, 153);
+    color: white;
+    font-size: 14px;
+    font-family: avenir-lt-w01_35-light1475496, sans-serif;
+}

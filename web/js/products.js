@@ -127,7 +127,7 @@ $(function() {
                 });
             },
             error:function (jqXHR) {
-                alert(jqXHR.status);
+                new Toast({context:$("body"),message:'Get Product Info Failed (Servlet:'+jqXHR.status+')'}).show();
             }
         });
         var modal = artModal({
@@ -171,12 +171,12 @@ $(function() {
                     new Toast({context:$("body"),message:'Add to cart successfully'}).show();
                 }
                 else{
-                    alert("Failed to add to cart.");
+                    new Toast({context:$("body"),message:'Failed to add to cart'}).show();
                     failedToAddToCart = true;
                 }
             },
             error:function (jqXHR) {
-                alert("Failed to add to cart.(Servlet:"+jqXHR.status+")");
+                new Toast({context:$("body"),message:'Failed to add to cart (Servlet:'+jqXHR.status+')'}).show();
                 failedToAddToCart = true;
             }
         });

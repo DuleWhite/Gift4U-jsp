@@ -31,7 +31,7 @@ public class CartProductManager {
     }
 
     public static void updateCartProducts(String cartProductsString) throws SQLException {
-        clear();
+        //clear();
         String[] cartProductsArray = new String[0];
         if (cartProductsString != null && !cartProductsString.equals("")) {
             cartProductsArray = cartProductsString.split(",");
@@ -117,5 +117,20 @@ public class CartProductManager {
             System.out.println();
         }
         System.out.println(getCount());
+    }
+
+    public static double updateCartProductQuantity(int productId, String color, String size, int quantity) {
+        System.out.println("updatequantity recived: "+productId+" "+color+" "+size+" "+quantity);
+        for (CartProduct cp:cartProducts){
+            if(cp.getProductId()==productId
+                    && (cp.getProductColor().equals(color) || (cp.getProductColor().equals("null")&&color.equals("")))
+                    && (cp.getProductSize().equals(size) || (cp.getProductSize().equals("null")&&size.equals("")))
+            ){
+                cp.setQuantity(quantity);
+                System.out.println("updatequantity:"+cp.getProductId()+","+cp.getQuantity());
+                return cp.getProductPrice()*cp.getQuantity();
+            }
+        }
+        return -1;
     }
 }

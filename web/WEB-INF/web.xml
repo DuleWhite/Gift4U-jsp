@@ -136,4 +136,15 @@
         <servlet-name>ConfirmReceiptAllServlet</servlet-name>
         <url-pattern>/ConfirmReceiptAllServlet</url-pattern>
     </servlet-mapping>
+
+    <!--13. UpdateCartProductQuantityServlet-->
+    <servlet>
+        <servlet-name>UpdateCartProductQuantityServlet</servlet-name>
+        <servlet-class>servlet.UpdateCartProductQuantityServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateCartProductQuantityServlet</servlet-name>
+        <url-pattern>/UpdateCartProductQuantityServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

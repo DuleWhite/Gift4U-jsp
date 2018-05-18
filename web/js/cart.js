@@ -14,7 +14,6 @@ $(function() {
     var btnShippingDist = $("#shipping-dist");
     var btnUpdate = $("#btn-update");
     btnShippingDist.click(function() {
-
         distpickerModal.open();
     });
     btnUpdate.click(function() {
@@ -100,4 +99,58 @@ $(function() {
             $(".summary").remove();
         }
     });
+
+    //Disable '-' at quantity input
+    $(".quantity-input").keypress(function () {
+        if (event.keyCode == 45) {
+            event.preventDefault();
+        }
+    });
+
+    //Disable '-' at quantity input
+    $(".quantity-input").keyup(function(){
+        var parameters = $($($($($($($(this)).parent()[0]).parent()[0]).prev()[0]).children()[1]).children()[1]).children();
+        var productId = $(parameters[0]).html().split(" ")[1];
+        var productColor = "";
+        var productSize = "";
+        var quantity = $(this).prop("value");
+        if(parameters.length==4){
+            productColor = $(parameters[1]).html().split(" ")[1];
+            productSize = $(parameters[2]).html().split(" ")[1];
+        }
+        else if(parameters.length == 3){
+            if($(parameters[1]).html().split(":")[0] == "Color"){
+                productColor = $(parameters[1]).html().split(" ")[1];
+            }
+            else{
+                productSize = $(parameters[1]).html().split(" ")[1];
+            }
+        }
+        var ret = "";
+        var success = false;
+        $.ajax({
+            url:"../UpdateCartProductQuantityServlet",
+            data:{
+                "productId":productId,
+                "productColor":productColor,
+                "productSize":productSize,
+                "quantity":quantity
+            },
+            async:false,
+            success:function (data) {
+                success = true;
+                ret = data;
+            },
+            error:function (jqXHR) {
+                new Toast({context:$("body"),message:'Change Failed, Please Refresh This Page  ('+jqXHR.status+')'}).show();
+            }
+        });
+        if(success){
+            $($($($($(this)).parent()[0]).next()[0]).children(":first")[0]).html("$"+ret.split("-")[0]);
+            $("#subtotal").html("$"+ret.split("-")[1]);
+            $("#total-price").html("$"+ret.split("-")[1]);
+            new Toast({context:$("body"),message:'Change Success'}).show();
+        }
+    });
+
 });

@@ -12,12 +12,12 @@ $(function () {
             dataType:"text",
             success : function(data) {
                 if(data=="true"){
-                    alert("Phone number exist.");
+                    new Toast({context:$("body"),message:'Phone number exist'}).show();
                     phoneExist = true;
                 }
             },
             error : function() {
-                alert("Unknown Error(2)");
+                new Toast({context:$("body"),message:'Unknown error (2)'}).show();
                 phoneExist = true;
             }
         });
@@ -35,14 +35,14 @@ $(function () {
                 if(data=='0'){
                     time1(this);
                 } else if (data=='51') {
-                    alert("Wrong Phone Number");
+                    new Toast({context:$("body"),message:'Wrong Phone Number'}).show();
                 }
                 else{
-                    alert("Failed To Send.("+data+")");
+                    new Toast({context:$("body"),message:'Failed To Send.('+data+')'}).show();
                 }
             },
             error : function() {
-                alert("Unknown Error");
+                new Toast({context:$("body"),message:'Unknown Error'}).show();
             }
         });
     });
@@ -60,12 +60,12 @@ $(function () {
             dataType:"text",
             success : function(data) {
                 if(data!="true"){
-                    alert("User (phone number) not exist.");
+                    new Toast({context:$("body"),message:'User (phone number) not exist'}).show();
                     phoneExist = false;
                 }
             },
             error : function() {
-                alert("Unknown Error(2)");
+                new Toast({context:$("body"),message:'Unknown Error (2)'}).show();
                 phoneExist = false;
             }
         });
@@ -83,14 +83,14 @@ $(function () {
                 if(data=='0'){
                     time2(this);
                 } else if (data=='51') {
-                    alert("Wrong Phone Number");
+                    new Toast({context:$("body"),message:'Wrong Phone Number'}).show();
                 }
                 else{
-                    alert("Failed To Send.("+data+")");
+                    new Toast({context:$("body"),message:'Failed To Send.('+data+')'}).show();
                 }
             },
             error : function() {
-                alert("Unknown Error");
+                new Toast({context:$("body"),message:'Unknown Error'}).show();
             }
         });
     });
@@ -101,10 +101,12 @@ $(function () {
         if(wait==0) {
             $("#getCode1").removeAttr("disabled");
             $("#getCode1").html("Send");
+            $("#getCode1").css("background-color","rgb(58, 128, 153)");
             wait = 60;
         }else {
             $("#getCode1").attr("disabled","true");
             $("#getCode1").html("Retry in "+wait);
+            $("#getCode1").css("background-color","rgb(200, 200, 200)");
             wait--;
             setTimeout(function() {     //倒计时方法
                 time1(obj);
@@ -115,10 +117,12 @@ $(function () {
         if(wait==0) {
             $("#getCode2").removeAttr("disabled");
             $("#getCode2").html("Send");
+            $("#getCode2").css("background-color","rgb(58, 128, 153)");
             wait = 60;
         }else {
             $("#getCode2").attr("disabled","true");
             $("#getCode2").html("Retry in "+wait);
+            $("#getCode2").css("background-color","rgb(200, 200, 200)");
             wait--;
             setTimeout(function() {     //倒计时方法
                 time2(obj);
@@ -130,7 +134,7 @@ $(function () {
     $("#signUp").click(function () {
         var username = $("#username").val();
         if(!username || username == ""){
-            alert("Username Cannot be empty.");
+            new Toast({context:$("body"),message:'Username Cannot be empty'}).show();
             return;
         }
         var usernameExist = false;
@@ -144,12 +148,12 @@ $(function () {
             dataType:"text",
             success : function(data) {
                 if(data=="true"){
-                    alert("Username exist.");
+                    new Toast({context:$("body"),message:'Username exist'}).show();
                     usernameExist = true;
                 }
             },
             error : function() {
-                alert("Unknown Error(1)");
+                new Toast({context:$("body"),message:'Unknown Error(1)'}).show();
                 usernameExist = true;
             }
         });
@@ -167,12 +171,12 @@ $(function () {
             dataType:"text",
             success : function(data) {
                 if(data!="true"){
-                    alert("Wrong Verification Code.");
+                    new Toast({context:$("body"),message:'Wrong Verification Code'}).show();
                     codeError = true;
                 }
             },
             error : function() {
-                alert("Unknown Error(3)");
+                new Toast({context:$("body"),message:'Unknown Error(3)'}).show();
                 codeError = true;
             }
         });
@@ -191,9 +195,13 @@ $(function () {
             dataType:"text",
             success : function(data) {
                 if(data=="true"){ $(location).attr('href', '../index.jsp'); }
-                else { alert("Register Failed."); }
+                else {
+                    new Toast({context:$("body"),message:'Register Failed'}).show();
+                }
             },
-            error : function() { alert("Unknown Error(4)"); }
+            error : function() {
+                new Toast({context:$("body"),message:'Unknown Error(4)'}).show();
+            }
         });
     });
     $("#login").click(function () {
@@ -209,12 +217,12 @@ $(function () {
             dataType:"text",
             success : function(data) {
                 if(data!="true"){
-                    alert("Wrong Verification Code.");
+                    new Toast({context:$("body"),message:'Wrong Verification Code'}).show();
                     codeError = true;
                 }
             },
             error : function() {
-                alert("Unknown Error(2)");
+                new Toast({context:$("body"),message:'Unknown Error (2)'}).show();
                 codeError = true;
             }
         });
@@ -230,9 +238,13 @@ $(function () {
             dataType:"text",
             success: function (data) {
                 if(data=="true") { $(location).attr('href', '../index.jsp'); }
-                else{ alert("Login Failed"); }
+                else{
+                    new Toast({context:$("body"),message:'Login Failed'}).show();
+                }
             },
-            error:function () { alert("Unknown Error(3)"); }
+            error:function () {
+                new Toast({context:$("body"),message:'Unknown Error (3)'}).show();
+            }
         })
     })
 });

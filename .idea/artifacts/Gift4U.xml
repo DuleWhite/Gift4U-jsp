@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Gift4U">
+    <output-path>$PROJECT_DIR$/out/artifacts/Gift4U</output-path>
+    <root id="archive" name="Gift4U.war">
+      <element id="artifact" artifact-name="Gift4U:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/mysql-connector-java-8.0.11.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/fastjson-1.2.47.jar" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/out/production/Gift4U/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

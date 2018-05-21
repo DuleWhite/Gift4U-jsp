@@ -113,7 +113,9 @@ $(function() {
         var productId = $(parameters[0]).html().split(" ")[1];
         var productColor = "";
         var productSize = "";
-        var quantity = $(this).prop("value");
+        var quantity = $(this).val();
+        if(quantity[0]=='-') quantity = quantity.split("-")[1];
+        $(this).val(quantity);
         if(parameters.length==4){
             productColor = $(parameters[1]).html().split(" ")[1];
             productSize = $(parameters[2]).html().split(" ")[1];

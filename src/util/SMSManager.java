@@ -16,10 +16,13 @@ public class SMSManager {
     public static String send(String phoneNumber, String code) {
         String textContent = encodeUrlString("[Gift4U] Your Code: "+code+".","UTF-8");
         String arg = "u="+USERNAME+"&p="+PASSWORD+"&m="+phoneNumber+"&c="+textContent;
-        //TODO: UNABLE TEST
-//        return request(URL,arg);
-        System.out.println(code);
-        return "0";
+
+        //FLAG: normal mode
+        return request(URL,arg);
+
+        //FLAG: debug mode
+        //System.out.println(code);
+        //return "0";
     }
 
     private static String request(String httpUrl, String httpArg) {

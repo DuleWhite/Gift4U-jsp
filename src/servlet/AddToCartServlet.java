@@ -20,6 +20,11 @@ public class AddToCartServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String cartProduct = productId + "-" + color + "-" + size + "-" + quantity;
         String cartProducts = (String) session.getAttribute("cartProducts");
+        String userid = (String) session.getAttribute("userid");
+        if(userid==null||userid.equals("")){
+            response.getWriter().write("noLogin");
+            return;
+        }
         if(cartProducts!=null && !cartProducts.equals("")){
             cartProducts += ",";
             cartProducts += cartProduct;

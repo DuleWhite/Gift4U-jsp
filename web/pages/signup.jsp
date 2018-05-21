@@ -25,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="../css/common.css">
     <link rel="stylesheet" type="text/css" href="../css/account.css">
     <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/toast.js"></script>
     <script type="text/javascript" src="../js/account.js"></script>
 </head>
 

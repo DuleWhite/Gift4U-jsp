@@ -155,6 +155,8 @@ $(function() {
             var size = $($("#selected-size span")[0]).html();
         }
         var quantity = $("#quantity-input").val();
+        if(quantity[0]=='-') quantity = quantity.split("-")[1];
+        $("#quantity-input").val(quantity);
         var $btn = $(this).button('loading');
         var failedToAddToCart = false;
         $.ajax({
@@ -167,7 +169,10 @@ $(function() {
             },
             async:false,
             success:function(data){
-                if(data=="true"){
+                if(data=="noLogin"){
+                    new Toast({context:$("body"),message:'You have to Login/Sign up first'}).show();
+                }
+                else if(data=="true"){
                     new Toast({context:$("body"),message:'Add to cart successfully'}).show();
                 }
                 else{

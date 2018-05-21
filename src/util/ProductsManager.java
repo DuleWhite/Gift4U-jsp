@@ -14,13 +14,16 @@ public class ProductsManager {
     public static ArrayList<Product> getProducts() throws SQLException {
         ArrayList<Product> products = new ArrayList<>();
         Connection connection = DBManager.getConnection();
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM products;");
-        while(resultSet.next()){
-            Product product = getProductFromResultSet(resultSet);
-            products.add(product);
+        if (connection != null) {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM products;");
+            while (resultSet.next()) {
+                Product product = getProductFromResultSet(resultSet);
+                products.add(product);
+            }
+            return products;
         }
-        return products;
+        else return null;
     }
 
     public static Product getProductById(int productid) throws SQLException{

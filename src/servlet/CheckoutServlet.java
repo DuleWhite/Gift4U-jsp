@@ -29,6 +29,7 @@ public class CheckoutServlet extends HttpServlet {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateString = sdf.format(date);
         String orderStatus = "Paid";
+        String orderNote = request.getParameter("notetext");
         List<CartProduct> products = CartProductManager.getCartProducts();
         String orderid="";
         String sql = "";
@@ -36,7 +37,7 @@ public class CheckoutServlet extends HttpServlet {
         Connection connection = DBManager.getConnection();
         try {
             Statement statement = connection.createStatement();
-            sql = "INSERT INTO orders(userid,totalprice,shippingto,orderdate,orderstatus) VALUES("+userid+","+totalPrice+",'"+shippingTo+"','"+dateString+"','"+orderStatus+"');";
+            sql = "INSERT INTO orders(userid,totalprice,shippingto,orderdate,orderstatus,ordernote) VALUES("+userid+","+totalPrice+",'"+shippingTo+"','"+dateString+"','"+orderStatus+"','"+orderNote+"');";
             int result = statement.executeUpdate(sql);
             if(result<=0){
                 response.getWriter().write("false");

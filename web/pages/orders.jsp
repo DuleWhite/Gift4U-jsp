@@ -168,7 +168,7 @@
                         <span>Shipping to: <%=shippingTo%></span>
                         <span>Status: <%=orderStatus%></span>
                         <%
-                            if(!orderNote.equals("")){
+                            if(orderNote!=null && !orderNote.equals("")){
                         %>
                         <span>Note: <%=orderNote%></span>
                         <%

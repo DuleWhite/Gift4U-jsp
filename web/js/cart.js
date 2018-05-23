@@ -31,10 +31,12 @@ $(function() {
     });
     $(".checkout").click(function() {
         var shippingTo = $("#shipping-dist").html();
+        var noteText = $("#note-text").val();
         $.ajax({
             url:"../CheckoutServlet",
             data:{
-                "shippingTo":shippingTo
+                "shippingTo":shippingTo,
+                "notetext":noteText
             },
             async:false,
             success:function (data) {

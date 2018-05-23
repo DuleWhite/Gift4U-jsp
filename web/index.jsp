@@ -214,7 +214,6 @@
           <div class="product-price">
             <h3 id="productPrice"></h3>
           </div>
-          <a>View Full Details</a>
           <div class="color" id="color">
             <h4>Color</h4>
             <div id="color-tip" class="tooltip right" role="tooltip">

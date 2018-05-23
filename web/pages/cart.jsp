@@ -252,7 +252,7 @@
                 <span>Add a note</span>
             </button>
             <div id="cart-note" class="cart-note">
-                <textarea maxlength="250" class="_32uvq" placeholder="Instructions? Special requests? Add them here." aria-label="Instructions? Special requests? Add them here."></textarea>
+                <textarea id="note-text" maxlength="250" class="_32uvq" placeholder="Instructions? Special requests? Add them here." aria-label="Instructions? Special requests? Add them here."></textarea>
             </div>
             <div class="secure-shopping">
                 <img src="../img/secure-shopping.png">

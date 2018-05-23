@@ -1,7 +1,8 @@
 <%@ page import="entity.Product" %>
 <%@ page import="util.ProductsManager" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="util.PageConnectionManager" %><%--
   Created by IntelliJ IDEA.
   User: duulewhite
   Date: 5/13/18
@@ -11,7 +12,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
-
+<%
+    try {
+        Product p = ProductsManager.getProductById(Integer.parseInt(request.getParameter("id")));
+%>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +29,7 @@
     <script src="../js/bootstrap.min.js"></script>
     <!-- magicZoom -->
     <script type="text/javascript" src="../js/magicZoom.js"></script>
-    <title>I'm a product | Gift4U</title>
+    <title><%=p.getProductName()%> | Gift4U</title>
     <link rel="stylesheet" type="text/css" href="../css/font.css">
     <link rel="stylesheet" type="text/css" href="../css/common.css">
     <link rel="stylesheet" type="text/css" href="../css/productDetails.css">
@@ -37,10 +41,6 @@
 </head>
 
 <body>
-<%
-    try {
-        Product p = ProductsManager.getProductById(Integer.parseInt(request.getParameter("id")));
-%>
 <!-- .logo -->
 <div class="logo container">
     <a href="../index.jsp">
@@ -97,8 +97,15 @@
 <!-- .navigation -->
 <div class="navigation container">
     <ul>
-        <li><a href="../index.jsp">Home</a></li>
-        <li><a style="opacity: .5">I'm a product</a></li>
+        <%
+            String[] prevPage = ((String) session.getAttribute("prevpage")).split("-");
+            for (String prev : prevPage){
+        %>
+        <li><a href="<%=prev%>.jsp"><%=PageConnectionManager.getPageName(prev)%></a></li>
+        <%
+            }
+        %>
+        <li><a style="opacity: .5"><%=p.getProductName()%></a></li>
     </ul>
 </div>
 <!-- /.navigation -->
@@ -186,7 +193,13 @@
         %>
         <div class="quantity">
             <h4>Quantity</h4>
-            <input id="quantity-input" type="number" name="quantity" min=1>
+            <div class="input-group input-postfix">
+                <input id="quantity-input" type="number" name="quantity" min=1>
+                <div class="spinner-arrows">
+                    <span id="up-arrow" class="up-arrow glyphicon-arrow_up" role="button"></span>
+                    <span id="down-arrow" class="down-arrow glyphicon-arrow_down" role="button"></span>
+                </div>
+            </div>
         </div>
         <span style="display: none">id=<%=p.getProductId()%></span>
         <button id="btn-add-to-cart" class="gift4u-button" data-loading-text="ADDING..." autocomplete="off">ADD TO CART</button>

@@ -43,7 +43,11 @@
     <script type="text/javascript" src="../js/cart.js"></script>
     <!-- distpicker : https://github.com/fengyuanchen/distpicker -->
 </head>
-
+<%
+    String prevPage = (String) session.getAttribute("prevpage");
+    prevPage = prevPage.split("-")[0] + "-cart";
+    session.setAttribute("prevpage",prevPage);
+%>
 <body>
 <!-- .logo -->
 <div class="logo container">
@@ -157,7 +161,7 @@
             <div class="list-parameters">
                 <div>Price</div>
                 <div>Qty</div>
-                <div>Total</div>
+                <div class="item-total">Total</div>
             </div>
             <%}%>
         </div>
@@ -209,9 +213,15 @@
                 <div class="item-right">
                     <div><span>$<%=cp.getProductPrice()%></span></div>
                     <div>
-                        <input class="quantity-input" type="number" name="quantity" min="1" value="<%=cp.getQuantity()%>">
+                        <div class="input-group input-postfix">
+                            <input class="quantity-input" type="number" name="quantity" min="1" value="<%=cp.getQuantity()%>">
+                            <div class="spinner-arrows">
+                                <span class="up-arrow glyphicon-arrow_up" role="button"></span>
+                                <span class="down-arrow glyphicon-arrow_down" role="button"></span>
+                            </div>
+                        </div>
                     </div>
-                    <div><span>$<%=cp.getProductPrice()*cp.getQuantity()%></span></div>
+                    <div class="item-total"><span>$<%=cp.getProductPrice()*cp.getQuantity()%></span></div>
                 </div>
             </div>
             <%

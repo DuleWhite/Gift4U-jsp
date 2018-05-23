@@ -34,7 +34,11 @@
     <script type="text/javascript" src="../js/toast.js"></script>
     <script type="text/javascript" src="../js/orders.js"></script>
 </head>
-
+<%
+    String prevPage = (String) session.getAttribute("prevpage");
+    prevPage = prevPage.split("-")[0] + "-orders";
+    session.setAttribute("prevpage",prevPage);
+%>
 <body>
 <!-- .logo -->
 <div class="logo container">
@@ -153,6 +157,7 @@
                     String totalPrice = resultSet.getString("totalprice");
                     String shippingTo = resultSet.getString("shippingto");
                     String orderStatus = resultSet.getString("orderstatus");
+                    String orderNote = resultSet.getString("ordernote");
             %>
             <div class="item">
                 <div class="item-left">
@@ -162,6 +167,13 @@
                         <span>Total: $<%=totalPrice%></span>
                         <span>Shipping to: <%=shippingTo%></span>
                         <span>Status: <%=orderStatus%></span>
+                        <%
+                            if(!orderNote.equals("")){
+                        %>
+                        <span>Note: <%=orderNote%></span>
+                        <%
+                            }
+                        %>
                     </div>
                     <%
                         if(orderStatus.equals("Delivery")){

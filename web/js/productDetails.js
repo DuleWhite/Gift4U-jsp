@@ -79,4 +79,27 @@ $(function() {
             currentOnProductParameters = this;
         }
     });
+
+    var up_arrow = $("#up-arrow");
+    var down_arrow = $("#down-arrow");
+    up_arrow.click(function () {
+        var quantity = Math.abs(parseInt($("#quantity-input").val()));
+        if(!quantity){
+            new Toast({context:$("body"),message:'Illegal quantity number'}).show();
+            return;
+        }
+        if(quantity>=1) {
+            $("#quantity-input").val(quantity + 1);
+        }
+    });
+    down_arrow.click(function () {
+        var quantity = Math.abs(parseInt($("#quantity-input").val()));
+        if(!quantity){
+            new Toast({context:$("body"),message:'Illegal quantity number'}).show();
+            return;
+        }
+        if(quantity>1) {
+            $("#quantity-input").val(quantity - 1);
+        }
+    })
 });

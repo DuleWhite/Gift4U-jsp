@@ -72,6 +72,7 @@ $(function() {
             }
         }
 
+        var ret = "";
         var success = false;
         var empty = false;
         $.ajax({
@@ -84,19 +85,27 @@ $(function() {
             async:false,
             success:function (data) {
                 success = true;
+                ret = data;
                 if(data=="empty") empty = true;
             },
             error:function (jqXHR) {
                 new Toast({context:$("body"),message:'Remove Failed ('+jqXHR.status+')'}).show();
             }
         });
-        if(success)$(this).parent().parent().parent().remove();
-        if(empty){
+        if(success && empty){
             $(".list-header .list-title span").remove();
             $(".list-header .list-parameters").remove();
             $(".empty-cart").css("display", "block");
             $(".list-body").remove();
             $(".summary").remove();
+        }
+        else if(success){
+            $(this).parent().parent().parent().remove();
+            $("#subtotal").html("$"+ret);
+            $("#total-price").html("$"+ret);
+        }
+        else{
+            new Toast({context:$("body"),message:'Remove Failed (-100)'}).show();
         }
     });
 
@@ -109,7 +118,7 @@ $(function() {
 
     //Disable '-' at quantity input
     $(".quantity-input").keyup(function(){
-        var parameters = $($($($($($($(this)).parent()[0]).parent()[0]).prev()[0]).children()[1]).children()[1]).children();
+        var parameters = $($($($($($($(this).parent()[0]).parent()[0]).parent()[0]).prev()[0]).children()[1]).children()[1]).children();
         var productId = $(parameters[0]).html().split(" ")[1];
         var productColor = "";
         var productSize = "";
@@ -148,11 +157,119 @@ $(function() {
             }
         });
         if(success){
-            $($($($($(this)).parent()[0]).next()[0]).children(":first")[0]).html("$"+ret.split("-")[0]);
+            $($($($($(this).parent()[0]).parent()[0]).next()[0]).children(":first")[0]).html("$"+ret.split("-")[0]);
             $("#subtotal").html("$"+ret.split("-")[1]);
             $("#total-price").html("$"+ret.split("-")[1]);
             new Toast({context:$("body"),message:'Change Success'}).show();
         }
     });
+
+    $(".up-arrow").click(function () {
+        var quantity = Math.abs(parseInt($($($(this).parent()[0]).prev()[0]).val()));
+        if(!quantity){
+            new Toast({context:$("body"),message:'Illegal quantity number'}).show();
+            return;
+        }
+        if(quantity>=1) {
+            quantity = quantity+1;
+            $($($($(this)).parent()[0]).prev()[0]).val(quantity);
+        }
+
+        var parameters = $($($($($($($($($(this).parent()[0]).prev()[0]).parent()[0]).parent()[0]).parent()[0]).prev()[0]).children()[1]).children()[1]).children();
+        var productId = $(parameters[0]).html().split(" ")[1];
+        var productColor = "";
+        var productSize = "";
+        if(parameters.length==4){
+            productColor = $(parameters[1]).html().split(" ")[1];
+            productSize = $(parameters[2]).html().split(" ")[1];
+        }
+        else if(parameters.length == 3){
+            if($(parameters[1]).html().split(":")[0] == "Color"){
+                productColor = $(parameters[1]).html().split(" ")[1];
+            }
+            else{
+                productSize = $(parameters[1]).html().split(" ")[1];
+            }
+        }
+        var ret = "";
+        var success = false;
+        $.ajax({
+            url:"../UpdateCartProductQuantityServlet",
+            data:{
+                "productId":productId,
+                "productColor":productColor,
+                "productSize":productSize,
+                "quantity":quantity
+            },
+            async:false,
+            success:function (data) {
+                success = true;
+                ret = data;
+            },
+            error:function (jqXHR) {
+                new Toast({context:$("body"),message:'Change Failed, Please Refresh This Page  ('+jqXHR.status+')'}).show();
+            }
+        });
+        if(success){
+            $($($($($($(this).parent()[0]).parent()[0]).parent()[0]).next()[0]).children(":first")[0]).html("$"+ret.split("-")[0]);
+            $("#subtotal").html("$"+ret.split("-")[1]);
+            $("#total-price").html("$"+ret.split("-")[1]);
+        }
+    });
+    $(".down-arrow").click(function () {
+        var quantity = Math.abs(parseInt($($($($(this)).parent()[0]).prev()[0]).val()));
+        if(!quantity){
+            new Toast({context:$("body"),message:'Illegal quantity number'}).show();
+            return;
+        }
+        if(quantity>1) {
+            quantity = quantity-1;
+            $($($($(this)).parent()[0]).prev()[0]).val(quantity);
+        }
+        else{
+            return;
+        }
+
+        var parameters = $($($($($($($($($(this).parent()[0]).prev()[0]).parent()[0]).parent()[0]).parent()[0]).prev()[0]).children()[1]).children()[1]).children();
+        var productId = $(parameters[0]).html().split(" ")[1];
+        var productColor = "";
+        var productSize = "";
+        if(parameters.length==4){
+            productColor = $(parameters[1]).html().split(" ")[1];
+            productSize = $(parameters[2]).html().split(" ")[1];
+        }
+        else if(parameters.length == 3){
+            if($(parameters[1]).html().split(":")[0] == "Color"){
+                productColor = $(parameters[1]).html().split(" ")[1];
+            }
+            else{
+                productSize = $(parameters[1]).html().split(" ")[1];
+            }
+        }
+        var ret = "";
+        var success = false;
+        $.ajax({
+            url:"../UpdateCartProductQuantityServlet",
+            data:{
+                "productId":productId,
+                "productColor":productColor,
+                "productSize":productSize,
+                "quantity":quantity
+            },
+            async:false,
+            success:function (data) {
+                success = true;
+                ret = data;
+            },
+            error:function (jqXHR) {
+                new Toast({context:$("body"),message:'Change Failed, Please Refresh This Page  ('+jqXHR.status+')'}).show();
+            }
+        });
+        if(success){
+            $($($($($($(this).parent()[0]).parent()[0]).parent()[0]).next()[0]).children(":first")[0]).html("$"+ret.split("-")[0]);
+            $("#subtotal").html("$"+ret.split("-")[1]);
+            $("#total-price").html("$"+ret.split("-")[1]);
+        }
+    })
 
 });

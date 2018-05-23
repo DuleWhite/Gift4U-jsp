@@ -18,11 +18,11 @@ public class SMSManager {
         String arg = "u="+USERNAME+"&p="+PASSWORD+"&m="+phoneNumber+"&c="+textContent;
 
         //FLAG: normal mode
-        return request(URL,arg);
+        //return request(URL,arg);
 
         //FLAG: debug mode
-        //System.out.println(code);
-        //return "0";
+        System.out.println(code);
+        return "0";
     }
 
     private static String request(String httpUrl, String httpArg) {

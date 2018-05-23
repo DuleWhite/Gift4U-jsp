@@ -1,16 +1,36 @@
 @media(min-width: 0) {
     .thanks {
-        width: 300px;
+        width: 100%;
     }
     .thanks-body {
-        width: 260px;
-        padding: 45px 10px;
+        width: 80%;
+        padding: 5% 8%;
     }
 }
 
-@media(min-width: 980px) {
+@media(min-width: 768px) {
     .thanks {
-        width: 980px;
+        width: 768px;
+    }
+    .thanks-body {
+        width: 660px;
+        padding: 45px;
+    }
+}
+
+@media(min-width: 992px) {
+    .thanks {
+        width: 992px;
+    }
+    .thanks-body {
+        width: 660px;
+        padding: 45px;
+    }
+}
+
+@media(min-width: 1200px) {
+    .thanks {
+        width: 1200px;
     }
     .thanks-body {
         width: 660px;

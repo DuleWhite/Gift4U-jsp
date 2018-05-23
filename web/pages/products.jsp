@@ -39,7 +39,9 @@
     <script type="text/javascript" src="../js/productDetails.js"></script>
     <script type="text/javascript" src="../js/products.js"></script>
 </head>
-
+<%
+    session.setAttribute("prevpage","products");
+%>
 <body>
 <!-- .logo -->
 <div class="logo container">
@@ -185,7 +187,13 @@
                     </div>
                     <div class="quantity">
                         <h4>Quantity</h4>
-                        <input id="quantity-input" type="number" name="quantity" min=1>
+                        <div class="input-group input-postfix">
+                            <input id="quantity-input" type="number" name="quantity" min=1>
+                            <div class="spinner-arrows">
+                                <span id="up-arrow" class="up-arrow glyphicon-arrow_up" role="button"></span>
+                                <span id="down-arrow" class="down-arrow glyphicon-arrow_down" role="button"></span>
+                            </div>
+                        </div>
                     </div>
                     <span style="display: none;" id="productId"></span>
                     <button id="btn-add-to-cart" class="gift4u-button" data-loading-text="ADDING..." autocomplete="off">ADD TO CART</button>

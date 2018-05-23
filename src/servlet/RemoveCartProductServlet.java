@@ -1,5 +1,6 @@
 package servlet;
 
+import entity.CartProduct;
 import util.CartProductManager;
 
 import javax.servlet.ServletException;
@@ -16,7 +17,10 @@ public class RemoveCartProductServlet extends HttpServlet {
         String productColor = request.getParameter("productColor");
         String productSize = request.getParameter("productSize");
         CartProductManager.removeProduct(productId,productColor,productSize);
+        double totalPrice = CartProductManager.getTotalPrice();
+        System.out.println("xxx:"+totalPrice);
         if(CartProductManager.getCount()==0)response.getWriter().write("empty");
+        else response.getWriter().write(""+totalPrice);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

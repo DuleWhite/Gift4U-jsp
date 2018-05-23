@@ -210,7 +210,7 @@
     font-family: Futura-LT-Book;
 }
 
-.item-list .list-header .list-parameters div:last-child {
+.item-total {
     text-align: right;
 }
 
@@ -233,7 +233,7 @@
         width: 260px;
         margin-top: 20px;
     }
-    .item .item-right div {
+    .item .item-right>div {
         width: 84px;
     }
 }
@@ -253,7 +253,7 @@
         width: 260px;
         margin-top: 20px;
     }
-    .item .item-right div {
+    .item .item-right>div {
         width: 84px;
     }
 }
@@ -273,7 +273,7 @@
         width: 368px;
         margin-top: 0;
     }
-    .item .item-right div {
+    .item .item-right>div {
         width: 120px;
     }
 }
@@ -293,7 +293,7 @@
         width: 368px;
         margin-top: 0;
     }
-    .item .item-right div {
+    .item .item-right>div {
         width: 120px;
     }
 }
@@ -372,10 +372,6 @@
     display: inline-block;
 }
 
-.item .item-right div:last-child {
-    text-align: right;
-}
-
 .item .item-right input {
     width: 82px;
     color: #575757;
@@ -395,6 +391,53 @@
     -moz-appearance: textfield;
 }
 
+.input-group{
+    width: 82px;
+    position: relative;
+    text-align: left;
+}
+
+.spinner-arrows{
+    position: absolute;
+    right: 10px;
+    width: 17px;
+    height: 43px;
+    top: 0;
+    opacity: 0;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+    font-family: glyphicons, serif;
+}
+
+.spinner-arrows:hover{
+    opacity: 1;
+}
+
+.spinner-arrows .up-arrow{
+    line-height: 28px;
+    display: block;
+    height: 50%;
+    cursor: pointer;
+    font-size: 15px;
+    opacity: .5;
+}
+
+.spinner-arrows .up-arrow:before{
+    content: "\e113";
+}
+
+.spinner-arrows .down-arrow{
+    line-height: 18px;
+    display: block;
+    height: 50%;
+    cursor: pointer;
+    font-size: 15px;
+    opacity: .5;
+}
+
+.spinner-arrows .down-arrow:before{
+    content: "\e114";
+}
 
 
 

@@ -43,8 +43,11 @@ $(function () {
         if(productSizes!=null) {
             var size = $($("#selected-size span")[0]).html();
         }
-        var quantity = $("#quantity-input").val();
-        if(quantity[0]=='-') quantity = quantity.split("-")[1];
+        var quantity = Math.abs(parseInt($("#quantity-input").val()));
+        if(!quantity){
+            new Toast({context:$("body"),message:'Illegal quantity number'}).show();
+            return;
+        }
         $("#quantity-input").val(quantity);
         var $btn = $(this).button('loading');
         var failedToAddToCart = false;

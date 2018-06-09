@@ -109,7 +109,6 @@
         try {
             if(cartProductsString!=null&&!cartProductsString.equals(""))
                 CartProductManager.updateCartProducts(cartProductsString);
-            List<CartProduct> cartProducts = CartProductManager.getCartProducts();
             session.removeAttribute("cartProducts");
             //session.setAttribute("cartProducts",CartProductManager.getLastesCartProductsString());
         } catch (SQLException e) {
